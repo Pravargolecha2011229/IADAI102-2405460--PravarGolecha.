@@ -2,7 +2,7 @@
 
 # ⚽ FootLens Analytics Pro — Football Injury Impact Dashboard
 
-**FA-2: Dashboarding and Deployment** | Mathematics for AI-II | CRS: Artificial Intelligence
+**SA of Maths-2** | Mathematics for AI-II | CRS: Artificial Intelligence
 **Developed by:** Pravar Golecha
 
 ## Project Overview
@@ -68,6 +68,18 @@ Each KPI dynamically adjusts based on filters applied and updates in real-time f
 **Dashboard URL:** https://iadai102-2405460--pravargolecha-footballinjury.streamlit.app/
 
 ## Snippets of the Project:
+<img width="1755" height="787" alt="Screenshot 2025-11-03 235537" src="https://github.com/user-attachments/assets/8a12d11d-75af-4930-9f44-6ed76e109e7e" />
+<img width="1826" height="696" alt="Screenshot 2025-11-03 235132" src="https://github.com/user-attachments/assets/f7bcab2e-9e2b-42fe-8f62-8f7aa191c9ab" />
+<img width="1797" height="655" alt="Screenshot 2025-11-03 235149" src="https://github.com/user-attachments/assets/50d8c29c-f914-403a-a09c-cda88f09fb76" />
+<img width="1809" height="661" alt="Screenshot 2025-11-03 235233" src="https://github.com/user-attachments/assets/8beb29b2-fd19-4da6-a7f7-022db6d54e79" />
+<img width="1737" height="768" alt="Screenshot 2025-11-03 235248" src="https://github.com/user-attachments/assets/13a4ee2a-b2d6-4775-9a20-18bf53722a20" />
+<img width="1762" height="755" alt="Screenshot 2025-11-03 235304" src="https://github.com/user-attachments/assets/fd2a0d9e-5fd6-40e9-91d0-d6154e4397c1" />
+<img width="1831" height="782" alt="Screenshot 2025-11-03 235326" src="https://github.com/user-attachments/assets/aa3546af-620c-4019-9d6e-6a450a28046d" />
+<img width="1754" height="788" alt="Screenshot 2025-11-03 235404" src="https://github.com/user-attachments/assets/49f5e2d9-8fe5-4c09-9342-6b4b755d5fe4" />
+<img width="1744" height="785" alt="Screenshot 2025-11-03 235430" src="https://github.com/user-attachments/assets/0ad7b3ef-1261-4e6b-b6dd-41ffff0bc018" />
+<img width="1776" height="772" alt="Screenshot 2025-11-03 235451" src="https://github.com/user-attachments/assets/99d3e96d-b24c-403f-8a07-0d2740e4f7e1" />
+<img width="1750" height="778" alt="Screenshot 2025-11-03 235506" src="https://github.com/user-attachments/assets/0df70789-5750-4def-8457-4a8cc6037965" />
+<img width="1754" height="789" alt="Screenshot 2025-11-03 235523" src="https://github.com/user-attachments/assets/4c1c9b39-6efc-4612-8f74-d57c1ce4c486" />
 
 
 ## Project Structure
@@ -215,4 +227,4 @@ IBCP Student | CRS: Artificial Intelligence
 * [SciPy Documentation](https://docs.scipy.org/)
 * [SA-Maths 2 Assessment Brief](./docs/)
 
-**Developed by Pravar Golecha | SA- Mathematics II for AI | November 2025**
+**Developed by Pravar Golecha | SA- Mathematics II for AI**
