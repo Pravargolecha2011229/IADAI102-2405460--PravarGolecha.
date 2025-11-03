@@ -1534,60 +1534,105 @@ with tab6:
     st.dataframe(summary_stats, use_container_width=True)
 
 # ========== TAB 7: DATA EXPORT ==========
-with tab7:
-    st.markdown('<div class="tab-header">📋 DATA EXPORT & DOWNLOAD</div>', unsafe_allow_html=True)
-    
-    st.markdown("### 📊 Filtered Dataset")
-    
-    columns_to_export = st.multiselect(
-        "Select columns to export:",
-        options=df_filtered.columns.tolist(),
-        default=['Name', 'Team Name', 'Position', 'Age', 'Injury', 'Injury_Severity',
-                'Injury_Duration_Days', 'Performance_Drop_Index', 'Team_Performance_Drop'],
-        key="export_columns"
-    )
-    
-    # Ensure the column exists before sorting
-if 'Performance_Drop_Index' in df_filtered.columns:
-    export_df = df_filtered[columns_to_export].sort_values('Performance_Drop_Index', ascending=False)
-else:
-    st.warning("⚠️ 'Performance_Drop_Index' column not found — sorting skipped.")
-    export_df = df_filtered[columns_to_export]
+# ============================================================
+# 🗂️ TAB 7: Data Export & Reports
+# ============================================================
 
-    
-    st.dataframe(export_df, use_container_width=True, height=400)
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        csv = export_df.to_csv(index=False)
-        st.download_button(
-            label="📥 Download as CSV",
-            data=csv,
-            file_name=f"injury_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-            mime="text/csv"
+with tab7:
+    st.markdown('<div class="tab-header">🗂️ DATA EXPORT & REPORTS</div>', unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        This section allows you to **export the filtered dataset** containing all computed metrics,
+        such as performance drop index, recovery rate, and team statistics.
+        If any required columns are missing, the app will automatically handle it
+        and still allow export without interruption.
+        """,
+    )
+
+    st.markdown("### 📤 Export Filtered Dataset")
+
+    # ------------------------------------------------------------
+    # Define which columns to include in export
+    # ------------------------------------------------------------
+    columns_to_export = [
+        "Name",
+        "Team Name",
+        "Position",
+        "Injury",
+        "Injury_Severity",
+        "Injury_Duration_Days",
+        "Avg_Rating_Before_Injury",
+        "Avg_Rating_After_Injury",
+        "Performance_Drop_Index",
+        "Performance_Recovery_Rate",
+    ]
+
+    # ------------------------------------------------------------
+    # Check if 'Performance_Drop_Index' exists, create placeholder if missing
+    # ------------------------------------------------------------
+    if "Performance_Drop_Index" not in df_filtered.columns:
+        st.warning(
+            "⚠️ 'Performance_Drop_Index' column not found — adding placeholder column for export."
         )
-    
-    with col2:
-        excel_buffer = BytesIO()
-        with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
-            export_df.to_excel(writer, sheet_name='Injuries', index=False)
-        excel_buffer.seek(0)
-        st.download_button(
-            label="📊 Download as Excel",
-            data=excel_buffer,
-            file_name=f"injury_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        df_filtered["Performance_Drop_Index"] = np.nan
+
+    # ------------------------------------------------------------
+    # Filter only the columns that actually exist in the DataFrame
+    # ------------------------------------------------------------
+    available_cols = [c for c in columns_to_export if c in df_filtered.columns]
+
+    if not available_cols:
+        st.error(
+            "❌ None of the specified export columns were found in the dataset. "
+            "Please check your selections or data filters."
         )
-    
-    with col3:
-        json_data = export_df.to_json(orient='records', indent=2)
+
+    else:
+        export_df = df_filtered[available_cols]
+
+        # --------------------------------------------------------
+        # Sort safely by 'Performance_Drop_Index' if available
+        # --------------------------------------------------------
+        if "Performance_Drop_Index" in export_df.columns:
+            export_df = export_df.sort_values("Performance_Drop_Index", ascending=False)
+        else:
+            st.info(
+                "ℹ️ Sorting skipped — 'Performance_Drop_Index' column not available."
+            )
+
+        # --------------------------------------------------------
+        # Create downloadable Excel export
+        # --------------------------------------------------------
+        from io import BytesIO
+
+        output = BytesIO()
+        export_df.to_excel(output, index=False, engine="openpyxl")
+
         st.download_button(
-            label="🔗 Download as JSON",
-            data=json_data,
-            file_name=f"injury_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-            mime="application/json"
+            label="📥 Download Exported Data (Excel)",
+            data=output.getvalue(),
+            file_name="Injury_Impact_Analysis_Export.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
+
+        st.success("✅ Export ready! You can download the filtered dataset above.")
+
+    st.markdown("---")
+
+    # ------------------------------------------------------------
+    # Summary Section
+    # ------------------------------------------------------------
+    st.markdown("### 📈 Summary of Exported Data")
+
+    if not df_filtered.empty:
+        st.dataframe(
+            export_df.head(10),
+            use_container_width=True,
+        )
+        st.caption("Preview of the top 10 rows of your exported data.")
+    else:
+        st.info("No data available to preview or export. Please adjust your filters.")
 
 # ============================================================================
 # FOOTER
