@@ -1599,15 +1599,5 @@ st.markdown(f'''
 <div style="font-size: 1.1rem; color: #4361ee; margin: 10px 0;">
     Created by <span style="font-weight: 600;">Pravar Golecha</span>
 </div>
-<div style="opacity: 0.8; margin: 5px 0;">
-    IBCP Mathematics | Advanced Analytics Project
-</div>
-<div style="font-size: 0.9rem; opacity: 0.7; margin: 10px 0;">
-    Last Updated: {datetime.now().strftime('%B %d, %Y')}
-</div>
-<div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.6; border-top: 1px solid rgba(67, 97, 238, 0.1); padding-top: 15px;">
-    Data Source: Professional Football Injury Database<br>
-    &copy; {datetime.now().year} Pravar Golecha. All Rights Reserved.
-</div>
 </div>
 ''', unsafe_allow_html=True)
